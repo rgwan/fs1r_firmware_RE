@@ -33,16 +33,16 @@ If it's not the same, then the `loader` jumps to `upgrade program` which located
 
 ### Upgrade notes
 
-If you want to upgrade FS1R's firmware by changing external EPROM, please short the JP1 jumper near to the CPU at the first boot (This jumper actually controls the flash hardware write protect pin of the CPU, when it is open, the flash controller inside the CPU will reject any operation to flash), otherwise it won't boot because the internal flash is write-protected. If you got everything right, `FLASH ROM ??%` will shown up on the screen. 
+If you want to upgrade FS1R's firmware by changing external EPROM, please short the JP1 jumper near to the CPU at the first boot (This jumper actually controls the flash hardware write protect pin of the CPU, when it is open, the flash controller inside the CPU will reject any operation to flash), otherwise it won't boot (maybe stuck at "FLASH ROM INITIALIZE" screen) because the internal flash is write-protected. If you got everything right, `FLASH ROM ??%` will shows up on the screen. 
 
 When your synthesizer first boot up after changed EPROM. **DO NOT POWER OFF THE SYNTHESIZER NOW, OTHERWISE THE DATA IN FLASH MAY LOSE!** 
 
-If the `loader program` being mis-erased, you have to reprogram it with `Z-FTAT`, `openh8writer` or *some old, bulky and expensive programmers*, that's really troublesome. I have some spare pre-programmed CPU parts of FS1R but I wish you'll never need it.
+If the `loader program` being mis-erased, you have to desolder it from the board (Typically that in-system-programming protocol will work without desoldering, but SH7044 ISP protocol use SCI1, which is configured other function in FS1R, to communicate with HOST. So you have to desolder it), reprogram it with `Z-FTAT`, `openh8writer` or *some old, bulky and expensive programmers*, considering the quality of Yamaha's PCB is not that good, that's really troublesome. I have some spare pre-programmed CPU parts of FS1R but I wish you'll never need it.
 
 When the screen backs to normal, the upgrade procedure is completed, you must to remove the short wire from the JP1 jumper. Normally, the FS1R will never erase or write to flash, because it's setting is stored in on-board NVRAM, remove the jumper will keep it's internal flash safe. 
 
 
-## About repairing
+## About repairment
 
 When you want to replace the CPU(HD64F7044F) of FS1R, please flash it at least with `fs1r_loader.bin`, I suggest to flash it with `fs1r_sh7044_flash_1.20_256k.bin`.
 
