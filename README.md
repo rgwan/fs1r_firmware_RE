@@ -51,6 +51,18 @@ Note: `fs1r_sh7044_flash_1.20_256k.bin` have to use with `Yamaha FS1R v1.20 EPRO
 The suggested IC4 replacement chip is MX29F1615 NOR flash in DIP-42 package, it won't need UV-light to erase and can be easily programmed by XGecu T48 programmer.
 
 
+## Bonus
+
+I got a PLG150-DX card few years ago and I realize that PLG150-DX actually use the same oscillator chip as the FS1R (FS, PN: YMP706).
+
+The PLG150-DX's schematic is way simpler than the FS1R, and it runs on a SH2 without internal ROM, which is far better for reversing than FS1R.
+
+I add those ROM dumps and combined these two dumps as a single-file ROM image. The service manual of PLG150-DX is also included.
+
+Have fun!
+
 ## Author
 
 Zhiyuan Wan <h@iloli.bid>, 2025/8/7
+
+Last update: 2026/5/24
