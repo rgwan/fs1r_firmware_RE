@@ -12,7 +12,7 @@ This repository contains YAMAHA FS1R's rom loader image, and some ghidra databas
 
 ## About the boot process and firmware upgrading procedure
 
-The CPU(SH7044, IC1)'s boot mode configuration is 4'b1010, which means it runs on flash mode, and external bus is mapped normally. The flash is constructed by lots of EBs (erase block), but I'm not going to dig into the detail here.
+The CPU(SH7044, IC1)'s boot mode configuration is 4'b1010, which means it runs on flash mode, and external bus is mapped normally. The flash is constructed by lots of EBs (erase block), but I'm not going to dig deeply into that detail here.
 
 ### Detailed structure of FS1R's firmware scheme
 
@@ -37,7 +37,7 @@ If you want to upgrade FS1R's firmware by changing external EPROM, please short 
 
 When your synthesizer first boot up after changed EPROM. **DO NOT POWER OFF THE SYNTHESIZER NOW, OTHERWISE THE DATA IN FLASH MAY LOSE!** 
 
-If the `loader program` being mis-erased, you have to desolder it from the board (Typically that in-system-programming protocol will work without desoldering, but SH7044 ISP protocol use SCI1, which is configured other function in FS1R, to communicate with HOST. So you have to desolder it), reprogram it with `Z-FTAT`, `openh8writer` or *some old, bulky and expensive programmers*, considering the quality of Yamaha's PCB is not that good, that's really troublesome. I have some spare pre-programmed CPU parts of FS1R but I wish you'll never need it.
+If the `loader program` being mis-erased, you have to desolder it from the board (Typically that in-system-programming protocol will work without desoldering, but SH7044 ISP protocol use SCI1, which is configured other function in FS1R, to communicate with HOST. So you have to desolder it), reprogram it with `F-ZTAT`, `openh8writer` or *some old, bulky and expensive programmers*, considering the quality of Yamaha's PCB is not that good, that's really troublesome. I have some spare pre-programmed CPU parts of FS1R but I wish you'll never need it.
 
 When the screen backs to normal, the upgrade procedure is completed, you must to remove the short wire from the JP1 jumper. Normally, the FS1R will never erase or write to flash, because it's setting is stored in on-board NVRAM, remove the jumper will keep it's internal flash safe. 
 
@@ -46,14 +46,16 @@ When the screen backs to normal, the upgrade procedure is completed, you must to
 
 When you want to replace the CPU(HD64F7044F) of FS1R, please flash it at least with `fs1r_loader.bin`, I suggest to flash it with `fs1r_sh7044_flash_1.20_256k.bin`.
 
-Note: `fs1r_sh7044_flash_1.20_256k.bin` have to use with `Yamaha FS1R v1.20 EPROM Firmware.bin` flashed in external Flash/EPROM(IC4) together, otherwise the synthesizer may not boot.
+If you can't have your new CPU being flashed before solders it to the mainboard, you may try to cut&wire MD1 to the ground and short JP1, then cut&wire PA3/4 (these two pins are used by panel) to your USB to UART converter and power up. That procedure may let you have access to `F-ZTAT`, which let you flash the CPU by an USB to UART transceiver.
+
+Note: `fs1r_sh7044_flash_1.20_256k.bin` have to use with `Yamaha FS1R v1.20 EPROM Firmware.bin` flashed in external Flash/EPROM(IC4) together, otherwise the synthesizer may not boot. And you have been **warned** using `F-ZTAT` on mainboard is a dangerous de-bricking method that I haven't tried.
 
 The suggested IC4 replacement chip is MX29F1615 NOR flash in DIP-42 package, it won't need UV-light to erase and can be easily programmed by XGecu T48 programmer.
 
 
 ## Bonus
 
-I got a PLG150-DX card few years ago and I realize that PLG150-DX actually use the same oscillator chip as the FS1R (FS, PN: YMP706).
+I got a PLG150-DX card few years ago and I realize that PLG150-DX actually use the same digital oscillator (tone generator, if you wish) chip as the FS1R (FS, PN: YMP706).
 
 The PLG150-DX's schematic is way simpler than the FS1R, and it runs on a SH2 without internal ROM, which is far better for reversing than FS1R.
 
@@ -65,4 +67,4 @@ Have fun!
 
 Zhiyuan Wan <h@iloli.bid>, 2025/8/7
 
-Last update: 2026/5/24
+Last update: 2026/7/21
