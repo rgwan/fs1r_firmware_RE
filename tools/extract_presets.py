@@ -43,6 +43,11 @@ def dx7_vced(vced155):
     cs = (-sum(body)) & 0x7F
     return bytes([0xF0, 0x43, 0x00, 0x00, 0x01, 0x1B] + body + [cs, 0xF7])
 
+def dx7_aced(aced49):
+    body = list(aced49)
+    cs = (-sum(body)) & 0x7F
+    return bytes([0xF0, 0x43, 0x00, 0x05, 0x00, 0x31] + body + [cs, 0xF7])
+
 
 def safe(name):
     return re.sub(r"[^A-Za-z0-9._-]+", "_", name.strip()) or "voice"
@@ -57,8 +62,9 @@ def main():
         r = rom[DX7_AT + i * 206: DX7_AT + (i + 1) * 206]
         name = r[196:206].decode("latin1")
         vced = r[51:206]          # DX7 VCED order: 6 ops, common, then name
+        aced = r[2:51]   # DX7 ACED
         p = OUT / "dx7" / f"{i:03d}_{safe(name)}.syx"
-        p.write_bytes(dx7_vced(vced))
+        p.write_bytes(dx7_vced(vced) + dx7_aced(aced))
         rows.append(("dx7", i, name, "", vced[134] + 1, str(p.relative_to(ROOT))))
 
     with open(OUT / "index.csv", "w", newline="", encoding="utf-8") as f:
