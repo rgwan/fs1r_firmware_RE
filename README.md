@@ -63,8 +63,10 @@ I add those ROM dumps and combined these two dumps as a single-file ROM image. T
 
 Have fun!
 
+Btw, ROM dump of PLG100-SG and PLG150-AN card has been added as well, for formant reference and VOP3 reference.
+
 ## Author
 
 Zhiyuan Wan <h@iloli.bid>, 2025/8/7
 
-Last update: 2026/9/18
+Last update: 2026/9/30
