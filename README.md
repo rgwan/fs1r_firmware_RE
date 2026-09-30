@@ -61,9 +61,9 @@ The PLG150-DX's schematic is way simpler than the FS1R, and it runs on a SH2 wit
 
 I add those ROM dumps and combined these two dumps as a single-file ROM image. The service manual of PLG150-DX is also included.
 
-Have fun!
+Btw, ROM dump of PLG100-SG and PLG150-AN card has been added as well, for formant reference and VOP3 reference. All ROM dumps by programmer is in 16-bit LE, you may need byteswap to analyze it correctly.
 
-Btw, ROM dump of PLG100-SG and PLG150-AN card has been added as well, for formant reference and VOP3 reference.
+Have fun!
 
 ## Author
 
